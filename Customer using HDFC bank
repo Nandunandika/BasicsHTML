@@ -1,0 +1,6 @@
+select distinct u.name,u.address
+from USERS u join BOOKINGDETAILS b
+    on u.USER_ID=b.USER_ID
+    where u.USER_ID not in(select USER_ID from BOOKINGDETAILS 
+                            where lower(name)='hdfc')
+    order by u.name;
