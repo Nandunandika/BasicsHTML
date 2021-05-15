@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+  <head>
+     <title>Reducing Interest Loan Estimation</title>
+     
+     <script type="text/javascript" src="Estimation.js"></script>
+ 
+    <style type="text/css">
+        h2 {
+        	text-align: center;
+        	color: #FF0000;
+        	font-style: italic;
+        	font-weight: bold;
+        }
+        
+        table  {
+        	text-align: left;
+        	background-color: #FFE77A;
+        	padding: 10px;
+        	
+        }
+        
+        #tablemain{
+        	margin-left: 35%;
+        	
+        	
+        }
+        
+        #Estimate  {
+        	 background-color: #F1F334;
+        	 color: #000000; 
+        	 font-size: 15px; 
+        	 height: 35px; 
+        	 width: 100px;
+        	 
+        }
+    </style>
+
+  </head>
+  <body>
+    
+    <h2>Reducing Interest Loan Estimation</h2>  
+    
+	<table id="tablemain" >
+	
+	   	<tbody>
+		   <tr> 
+		    <td>	
+					<table>
+						<tbody>
+							<tr>
+								<td>Principal Loan Amount (Rs.)</td>
+								<td>
+								    <input id="principalAmount" placeholder="Principal Amount" required>
+								    </td>
+							</tr>
+							<tr>
+								<td>Interest Rate (%)</td>
+							    <td><input id="interestRate" placeholder="Interest Per Annum" required>
+							        <!--  Fill with appropriate code here --></td>
+							
+							</tr>
+							<tr>
+								<td>Tenure (in months)</td>
+							    <td><input id="tenure" placeholder="Tenure in Months" required>
+							        <!--  Fill with appropriate code here --></td>
+							</tr>
+						     
+							<tr>
+							 	<td></td>
+								<td align="left" style="padding: 10px">
+									<input  id="Estimate" type="button" value="Estimate" onclick="EstimateReducingInterestLoan()" >
+								</td>
+							</tr>
+						
+					
+				    	</tbody>
+					</table>
+				  </td>
+			  </tr>	
+			  <tr>
+			  	<td>
+					<table>
+						<caption><b>Loan Estimation</b></caption>
+						<tbody>
+						    <tr>
+								<td>Details</td>
+								<td>Reducing Interest Loan</td>
+								<td>Fixed Interest Loan</td>
+								
+							</tr>
+						
+							<tr>
+								<td>Total Interest   Rs.</td>
+								<td><output id="tInterest"></output></td>
+								<td><output id="tInterestFixed"></output></td>
+								
+							</tr>
+							<tr>
+								<td>Total Payment Rs.</td>
+								<td><output id="tPayment" ></output></td>
+								<td><output id="tPaymentFixed" ></output></td>
+							</tr>
+							<tr>
+								<td>Monthly EMI Rs.</td>
+								<td><output id="EMI"></output></td>
+								<td><output id="EMIFixed"></output></td>
+							</tr>
+						</tbody>
+					</table>
+				</td>
+			</tr>	
+		</tbody>
+	</table>
+</body>
+
+</html>
+
+
+
+
+
+
+var N = 0;
+var P = 0;
+var R = 0;
+var EMI = 0;
+var r=0;
+var tP=0;
+var tPF =0;
+var EMIF=0;
+var tI=0;
+var t=0;
+/* 
+
+    Fill with appropriate and required javascript global variables  code here 
+
+*/
+
+
+
+function EstimateReducingInterestLoan()
+{	P = document.getElementById("principalAmount").value;
+    r = document.getElementById("interestRate").value;
+    N = document.getElementById("tenure").value;
+    
+    
+    /* Fill with required javascript code to read input values from HTML Components  */
+
+
+	  calculateEMI();
+      totalPayment();
+      totalInterest();
+      EstimateFixedInterestLoan();
+
+
+    
+}
+
+function EstimateFixedInterestLoan()
+{
+   
+    R = (r/100)/12;
+    n = N/12;
+    t= P*(r/100)*n;
+    tPF = P*1+t;
+    EMIF = (tPF)/(n*12);
+    /* Fill with required javascript code here  */
+    document.getElementById("tInterestFixed").innerHTML = t.toFixed(2); /Assign total Interest value here/
+    
+     /* Fill with required javascript code here  */
+    document.getElementById("tPaymentFixed").innerHTML = tPF.toFixed(2); /Assign total payment value here/
+    
+     /* Fill with required javascript code here  */
+    document.getElementById("EMIFixed").innerHTML = EMIF.toFixed(2); /Assign emi  value here/
+    
+    
+}
+
+function calculateEMI(){
+   
+    R = (r/100)/12;
+    EMI = (P*R*(Math.pow((1+R),N)/((Math.pow((1+R),N))-1)));
+    
+    
+	
+    /* Fill with required javascript code here  */
+    
+    document.getElementById("EMI").innerHTML = EMI.toFixed(2);/Assign emi value here/
+}
+
+function totalPayment(){
+    
+	tP = EMI*N;
+	/* Fill with required javascript code here  */
+	
+	
+    document.getElementById("tPayment").innerHTML = tP.toFixed(2); /Assign total payment value here/
+}
+
+function totalInterest(){
+    
+    tI = EMI*N-P;
+	
+/* Fill with required javascript code here  */
+
+    document.getElementById("tInterest").innerHTML = tI.toFixed(2); /Assign total Interest value here/
+}
