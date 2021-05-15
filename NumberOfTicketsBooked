@@ -1,0 +1,4 @@
+select USER_ID,count(BD_ID) as No_Of_Times
+from BOOKINGDETAILS
+group by USER_ID
+order by USER_ID;
